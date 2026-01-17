@@ -1,5 +1,6 @@
 package com.example.week3.week3Learning;
 
+import com.example.week3.week3Learning.Service.ProductService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Week3LearningApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Week3LearningApplication.class, args);
+
+        SpringApplication.run(Week3LearningApplication.class, args);
 	}
 
 }
