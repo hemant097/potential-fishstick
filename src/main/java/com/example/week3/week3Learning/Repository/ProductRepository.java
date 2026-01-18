@@ -1,6 +1,7 @@
 package com.example.week3.week3Learning.Repository;
 
 import com.example.week3.week3Learning.Entity.ProductEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,18 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
     //SELECT DISTINCT * FROM table WHERE quantity = ?;
     List<ProductEntity> findDistinctByQuantity(Integer quantity);
 
+
+    //SELECT * FROM table WHERE title LIKE '?'; --we need to use % or _ while passing title
+    List<ProductEntity> findByTitleLike(String title);
+
+
+    //SELECT * FROM table WHERE title LIKE '?'; --no need to use % or _ as spring takes care of it
+    List<ProductEntity> findByTitleContaining(String title);
+
+    //Select * from table order by price desc;
+    List<ProductEntity> findByOrderByPriceDesc();
+
+    List<ProductEntity> findBy(Sort sort);
 
     //Custom queries, if required as JPA does not cover everything
     @Query("select sum(p.quantity) from ProductEntity p")

@@ -88,8 +88,22 @@ class Week3LearningApplicationTests {
     }
 
     @Test
+    void getRepo7(){
+        //will return items which have title starting with honey
+        List<ProductEntity> productEntityList = prodRepo.findByTitleLike("honey%");
+        productEntityList.forEach(System.out::println);
+    }
+
+
+    @Test
+    void getRepo8(){
+        List<ProductEntity> productEntityList = prodRepo.findByTitleContaining("harat");
+        productEntityList.forEach(System.out::println);
+    }
+
+    @Test
     void getSingleItem(){
-        Optional<ProductEntity> productEntityOptional = prodRepo.findByTitleAndPrice("HoneyVeda Lodu Honey",BigDecimal.valueOf(475.5));
+        Optional<ProductEntity> productEntityOptional = prodRepo.findByTitleAndPrice("Jamun Honey",BigDecimal.valueOf(475.5));
 
        try{
            System.out.println(productEntityOptional.orElseThrow());
