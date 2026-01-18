@@ -6,14 +6,43 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
+    //as title and price having a unique constraint, so it is expected to return one row only
     Optional<ProductEntity> findByTitleAndPrice(String title, BigDecimal price);
 
+
+    //Definition in SQL -> SELECT * FROM table_name WHERE price = ? LIMIT 3; --no ordering takes place
+    List<ProductEntity> findFirst3ByPrice(BigDecimal bigDecimal);
+
+
+    //SELECT * FROM table ORDER BY price ASC LIMIT 3; --order in ascending
+    List<ProductEntity> findFirst3ByOrderByPriceAsc();
+
+
+    //Select * from table where created_at > ?
+    List<ProductEntity> findByCreatedAtAfter(LocalDate localDate);
+
+
+    //select * from table where quantity=? or price=?;
+    List<ProductEntity> findByQuantityOrPrice(Integer quantity, BigDecimal price);
+
+
+    //select * from table where quantity>=11 or price<=470.5 order by price ASC;
+    List<ProductEntity> findByQuantityGreaterThanEqualOrPriceLessThanEqualOrderByPriceAsc(Integer quantity,BigDecimal price);
+
+
+    //SELECT DISTINCT * FROM table WHERE quantity = ?;
+    List<ProductEntity> findDistinctByQuantity(Integer quantity);
+
+
+    //Custom queries, if required as JPA does not cover everything
     @Query("select sum(p.quantity) from ProductEntity p")
-    Optional<Integer> findTotalItems();
+    Optional<Integer> findTotalQuantityOfItems();
 
 }
