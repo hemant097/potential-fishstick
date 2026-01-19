@@ -1,5 +1,7 @@
 package com.example.week3.week3Learning.Repository;
 
+import com.example.week3.week3Learning.DTO.BloodGroupStats;
+import com.example.week3.week3Learning.DTO.CPatientInfo;
 import com.example.week3.week3Learning.DTO.IPatientInfo;
 import com.example.week3.week3Learning.Entity.PatientEntity;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +19,12 @@ public interface PatientRepository extends JpaRepository<PatientEntity,Long> {
     // with IPatientInfo methods (if any)
     @Query("Select p.id as id, p.email as email, p.firstName as firstName, p.lastName as lastName from PatientEntity p")
     List<IPatientInfo> getLimitedPatientInfo(Pageable pageable);
+
+    @Query("Select new com.example.week3.week3Learning.DTO.CPatientInfo(p.id,p.firstName) from PatientEntity p")
+    List<CPatientInfo> getLimitedPatientInfo2(Pageable pageable);
+
+    @Query("Select new com.example.week3.week3Learning.DTO.BloodGroupStats(p.bloodGroup,count(p)) " +
+            "from PatientEntity p group by p.bloodGroup order by count(p) desc ")
+    List<BloodGroupStats> getLimitedPatientInfoUsingAggregrateQuery();
+
 }
