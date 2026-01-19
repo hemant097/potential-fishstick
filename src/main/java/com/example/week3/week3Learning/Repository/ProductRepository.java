@@ -1,6 +1,7 @@
 package com.example.week3.week3Learning.Repository;
 
 import com.example.week3.week3Learning.Entity.ProductEntity;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -47,7 +48,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
 
 
     //SELECT * FROM table WHERE title LIKE '?'; --no need to use % or _ as spring takes care of it
-    List<ProductEntity> findByTitleContaining(String title);
+    List<ProductEntity> findByTitleContaining(String title, Pageable pageable);
 
     //Select * from table order by price desc;
     List<ProductEntity> findByOrderByPriceDesc();

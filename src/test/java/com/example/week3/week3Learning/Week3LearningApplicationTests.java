@@ -97,7 +97,7 @@ class Week3LearningApplicationTests {
 
     @Test
     void getRepo8(){
-        List<ProductEntity> productEntityList = prodRepo.findByTitleContaining("harat");
+        List<ProductEntity> productEntityList = prodRepo.findByTitleContaining("harat",null);
         productEntityList.forEach(System.out::println);
     }
 
