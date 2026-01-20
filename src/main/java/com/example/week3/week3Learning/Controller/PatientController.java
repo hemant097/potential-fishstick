@@ -4,6 +4,7 @@ import com.example.week3.week3Learning.DTO.BloodGroupStats;
 import com.example.week3.week3Learning.DTO.CPatientInfo;
 import com.example.week3.week3Learning.DTO.IPatientInfo;
 import com.example.week3.week3Learning.Repository.PatientRepository;
+import com.example.week3.week3Learning.Service.PatientService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +15,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/patients")
 
-public class PatientController implements CommandLineRunner {
+public class PatientController {
 
     private final PatientRepository patientRepository;
+    private final PatientService patientService;
 
-    PatientController(PatientRepository patientRepository) {
+    //Constructor injection
+    PatientController(PatientRepository patientRepository, PatientService patientService) {
         this.patientRepository = patientRepository;
+        this.patientService = patientService;
     }
 
 
-    @Override
-    public void run(String... args) throws Exception {
+    public void run2(String... args) throws Exception {
 
         List<IPatientInfo> patientEntityListInterfaceProjection = patientRepository.getLimitedPatientInfo(PageRequest.of(0,5));
 
@@ -41,11 +44,26 @@ public class PatientController implements CommandLineRunner {
             System.out.println("patient's first name is "+patient.firstName());
         });
 
-        List<BloodGroupStats> patientEntityListDTOProjection2 = patientRepository.getLimitedPatientInfoUsingAggregrateQuery();
+        List<BloodGroupStats> patientEntityListDTOProjection2 = patientRepository.getLimitedPatientInfoUsingAggregateQuery();
 
         patientEntityListDTOProjection2.forEach((bg)->{
-            System.out.println(bg);
+            System.out.println("blood group "+bg.bloodGroup()+" has count"+bg.count());
         });
+
+        System.out.println(patientRepository.updatePatientNameWithId("Chamanbahar",15L));
+
+        System.out.println(patientRepository.deletePatientWithId(14L));
+
+
+
+
+
+    }
+
+     //use when implementing CommandLineRunner
+    public void run(String... args) throws Exception{
+
+        patientService.testPatientTransaction();
 
     }
 }

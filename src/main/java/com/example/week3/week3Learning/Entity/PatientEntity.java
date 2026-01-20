@@ -2,19 +2,17 @@ package com.example.week3.week3Learning.Entity;
 
 import com.example.week3.week3Learning.Entity.Type.BloodGroup;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Builder
+@Getter
+@Setter
 @Table(
         name = "patients",
         uniqueConstraints = {
@@ -27,19 +25,28 @@ public class PatientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    String firstName;
+    private String firstName;
 
-    String lastName;
+    private String lastName;
 
     @Column(name="dob")
-    LocalDate dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Enumerated(EnumType.STRING)
-    BloodGroup bloodGroup;
+    private BloodGroup bloodGroup;
 
-    String email;
+    private String email;
 
     @CreationTimestamp
-    LocalDate createdAt;
+    private LocalDate createdAt;
+
+    @OneToOne
+//    @JoinColumn(name = "ins_id") //should use on owning side
+    private Insurance insurance;  //owning side
+
+
+    private Set<Appointment> appointmentSet = new HashSet<>();
+
+
 
 }
