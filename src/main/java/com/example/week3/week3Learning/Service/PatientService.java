@@ -27,4 +27,12 @@ public class PatientService {
         PatientEntity p3 = patientRepository.findById(1L).orElseThrow();
         System.out.println(p3.getEmail());
     }
+
+    public void deletePatient(Long patientId){
+        patientRepository.findById(patientId).orElseThrow();
+        patientRepository.deleteById(patientId);
+
+    }
+
+
 }

@@ -40,13 +40,18 @@ public class PatientEntity {
     @CreationTimestamp
     private LocalDate createdAt;
 
-    @OneToOne
-//    @JoinColumn(name = "ins_id") //should use on owning side
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ins_id") //should use on owning side
     private Insurance insurance;  //owning side
 
-
+    @OneToMany(mappedBy = "patient") //inverse side in this relationship
     private Set<Appointment> appointmentSet = new HashSet<>();
 
 
 
 }
+
+
+
+
+

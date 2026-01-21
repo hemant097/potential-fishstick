@@ -10,6 +10,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class Insurance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

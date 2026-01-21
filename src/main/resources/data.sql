@@ -74,3 +74,11 @@ VALUES
     ('2026-01-13', 'karan@gmail.com',    'A_NEGATIVE',  '1995-02-14', 'Karan',   'Bansal'),
     ('2026-01-14', 'anjali@gmail.com',   'B_POSITIVE',  '1998-01-27', 'Anjali',  'Chopra'),
     ('2026-01-15', 'suresh@gmail.com',   'O_NEGATIVE',  '1993-05-03', 'Suresh',  'Patel');
+
+--for doctors
+INSERT INTO week3db.doctors
+(name, expertise,email)
+VALUES
+    ('Dr AK Singh','Pulmonary','aksingh@gmail.com'),
+    ('Dr Nirmal Pandey','Neurosurgeon','nirmal@nirmal.com'),
+    ('Dr IN Vajpayee','Neurosurgeon','invajpayee@gmail.com');

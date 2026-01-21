@@ -3,6 +3,8 @@ package com.example.week3.week3Learning.Controller;
 import com.example.week3.week3Learning.DTO.BloodGroupStats;
 import com.example.week3.week3Learning.DTO.CPatientInfo;
 import com.example.week3.week3Learning.DTO.IPatientInfo;
+import com.example.week3.week3Learning.Entity.Appointment;
+import com.example.week3.week3Learning.Entity.Insurance;
 import com.example.week3.week3Learning.Repository.PatientRepository;
 import com.example.week3.week3Learning.Service.PatientService;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/patients")
 
-public class PatientController {
+public class PatientController implements CommandLineRunner {
 
     private final PatientRepository patientRepository;
     private final PatientService patientService;
@@ -61,9 +63,12 @@ public class PatientController {
     }
 
      //use when implementing CommandLineRunner
+
+    @Override
     public void run(String... args) throws Exception{
 
-        patientService.testPatientTransaction();
+        System.out.println("in patient controller cmd line runer");
+//        patientService.deletePatient(1L);
 
     }
 }
