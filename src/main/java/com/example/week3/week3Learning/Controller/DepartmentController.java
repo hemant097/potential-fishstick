@@ -5,12 +5,15 @@ import com.example.week3.week3Learning.Entity.Doctor;
 import com.example.week3.week3Learning.Service.DepartmentService;
 import com.example.week3.week3Learning.Service.DoctorService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.print.Doc;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/departments")
 public class DepartmentController implements CommandLineRunner {
 
     private final DepartmentService departmentService;
@@ -40,5 +43,10 @@ public class DepartmentController implements CommandLineRunner {
         updatedDepartment.getDoctors().forEach(d-> System.out.println(d.getEmail()+", "+d.getExpertise()));
 
 
+    }
+    @DeleteMapping("/del/{id}")
+    public ResponseEntity<String> deleteDepartment(@PathVariable Long id){
+        departmentService.deleteDepartment(id);
+        return ResponseEntity.ok("deleted successfully");
     }
 }

@@ -6,11 +6,15 @@ import com.example.week3.week3Learning.Repository.PatientRepository;
 import com.example.week3.week3Learning.Service.InsuranceService;
 import com.example.week3.week3Learning.Service.PatientService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 
 @RestController
+@RequestMapping("/insurance")
 public class InsuranceController {
 
     private final InsuranceService insuranceService;
@@ -20,17 +24,17 @@ public class InsuranceController {
         this.insuranceService =  insuranceService;
     }
 
-//    @Override
-    public void run(String... args) throws Exception {
-        System.out.println("in insurance controller cmd line runer");
-//        Insurance insurance = Insurance.builder()
-//                .provider("HDFC")
-//                .policyNumber("HDFC2345")
-//                .validUntil(LocalDate.of(2029,01,01))
-//                .build();
-//        Insurance updatedInsurance = insuranceService.assignInsuranceToPatient(insurance,1L);
-//
-//  System.out.println(   updatedInsurance.getPatient().getEmail()+" "+updatedInsurance.getProvider()+" "+updatedInsurance.getValidUntil());
+    @PostMapping("/add")
+    public ResponseEntity<String> addInsuranceToPatient() {
+
+        Insurance insurance = Insurance.builder()
+                .provider("HDFC")
+                .policyNumber("HDFC2345")
+                .validUntil(LocalDate.of(2029,01,01))
+                .build();
+        Insurance updatedInsurance = insuranceService.assignInsuranceToPatient(insurance,1L);
+
+        return ResponseEntity.ok(   updatedInsurance.getPatient().getEmail()+" "+updatedInsurance.getProvider()+" "+updatedInsurance.getValidUntil());
 
     }
 }

@@ -44,4 +44,10 @@ public class DepartmentService {
 
         return department;
     }
+
+    @Transactional
+    public void deleteDepartment(Long departmentId){
+        departmentRepository.deleteById(departmentId);
+        System.out.println("deleted");
+    }
 }

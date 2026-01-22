@@ -44,7 +44,7 @@ public class PatientEntity {
     @JoinColumn(name = "ins_id") //should use on owning side
     private Insurance insurance;  //owning side
 
-    @OneToMany(mappedBy = "patient") //inverse side in this relationship
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL) //inverse side in this relationship
     private Set<Appointment> appointmentSet = new HashSet<>();
 
     //as we want the appointments related to a patient be removed when the patient is deleted

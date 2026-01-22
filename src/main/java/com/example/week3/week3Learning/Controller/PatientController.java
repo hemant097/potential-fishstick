@@ -9,6 +9,9 @@ import com.example.week3.week3Learning.Repository.PatientRepository;
 import com.example.week3.week3Learning.Service.PatientService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +33,7 @@ public class PatientController  {
 
 
     //inside-> custom Query, Transactional and Modifying Repository methods usage
-    public void run2(String... args) throws Exception {
+    public void run(String... args) throws Exception {
 
         List<IPatientInfo> patientEntityListInterfaceProjection = patientRepository.getLimitedPatientInfo(PageRequest.of(0,5));
 
@@ -64,11 +67,10 @@ public class PatientController  {
     }
 
 
-//    @Override
-    public void run(String... args) throws Exception{
 
-        System.out.println("in patient controller cmd line runer");
-//        patientService.deletePatient(1L);
-
+    @DeleteMapping("/del/{id}")
+    public ResponseEntity<String> deletePatientAndAppointments(@PathVariable Long id){
+        patientService.deletePatient(id);
+        return ResponseEntity.ok("deleted successfully");
     }
 }
