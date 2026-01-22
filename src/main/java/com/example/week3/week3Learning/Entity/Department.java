@@ -1,11 +1,8 @@
 package com.example.week3.week3Learning.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.print.Doc;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +10,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "departments")
 public class Department {
     @Id
@@ -27,6 +26,7 @@ public class Department {
     private Doctor headDoctor;
 
     @ManyToMany
+    @Builder.Default
     private Set<Doctor> doctors = new HashSet<>();
 
 

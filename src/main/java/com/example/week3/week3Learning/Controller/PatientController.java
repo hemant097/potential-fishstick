@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/patients")
 
-public class PatientController implements CommandLineRunner {
+public class PatientController  {
 
     private final PatientRepository patientRepository;
     private final PatientService patientService;
@@ -29,6 +29,7 @@ public class PatientController implements CommandLineRunner {
     }
 
 
+    //inside-> custom Query, Transactional and Modifying Repository methods usage
     public void run2(String... args) throws Exception {
 
         List<IPatientInfo> patientEntityListInterfaceProjection = patientRepository.getLimitedPatientInfo(PageRequest.of(0,5));
@@ -62,9 +63,8 @@ public class PatientController implements CommandLineRunner {
 
     }
 
-     //use when implementing CommandLineRunner
 
-    @Override
+//    @Override
     public void run(String... args) throws Exception{
 
         System.out.println("in patient controller cmd line runer");

@@ -1,5 +1,6 @@
 package com.example.week3.week3Learning.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,17 +23,17 @@ public class Appointment {
     @Column(length = 500)
     private String name;
 
+    @JsonIgnore
     @ManyToOne // read this relationship like many appointment to one patient
-    @JoinColumn(name = "patient_id",
-            nullable = false)
+    @JoinColumn(name = "patient_id", nullable = false)
     //owning side should have JoinColumn
     private PatientEntity patient;
     //owning side in this relationship
 
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "doctor_id",
-            nullable = false)
+    @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 
 

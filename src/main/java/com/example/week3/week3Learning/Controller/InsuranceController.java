@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 
 @RestController
-public class InsuranceController implements CommandLineRunner {
+public class InsuranceController {
 
     private final InsuranceService insuranceService;
 
@@ -20,17 +20,17 @@ public class InsuranceController implements CommandLineRunner {
         this.insuranceService =  insuranceService;
     }
 
-    @Override
+//    @Override
     public void run(String... args) throws Exception {
         System.out.println("in insurance controller cmd line runer");
-        Insurance insurance = Insurance.builder()
-                .provider("HDFC")
-                .policyNumber("HDFC2345")
-                .validUntil(LocalDate.of(2029,01,01))
-                .build();
-        Insurance updatedInsurance = insuranceService.assignInsuranceToPatient(insurance,1L);
-
-  System.out.println(   updatedInsurance.getPatient().getEmail()+" "+updatedInsurance.getProvider()+" "+updatedInsurance.getValidUntil());
+//        Insurance insurance = Insurance.builder()
+//                .provider("HDFC")
+//                .policyNumber("HDFC2345")
+//                .validUntil(LocalDate.of(2029,01,01))
+//                .build();
+//        Insurance updatedInsurance = insuranceService.assignInsuranceToPatient(insurance,1L);
+//
+//  System.out.println(   updatedInsurance.getPatient().getEmail()+" "+updatedInsurance.getProvider()+" "+updatedInsurance.getValidUntil());
 
     }
 }

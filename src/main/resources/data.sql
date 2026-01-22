@@ -79,6 +79,15 @@ VALUES
 INSERT INTO week3db.doctors
 (name, expertise,email)
 VALUES
-    ('Dr AK Singh','Pulmonary','aksingh@gmail.com'),
-    ('Dr Nirmal Pandey','Neurosurgeon','nirmal@nirmal.com'),
-    ('Dr IN Vajpayee','Neurosurgeon','invajpayee@gmail.com');
+    ('Dr AK Singh','Pulmonary','aksingh@regency.com'),
+    ('Dr Nirmal Pandey','Neurosurgeon','nirmal@outlook.com'),
+    ('Dr IN Vajpayee','Neurophysiologist','invajpayee@gmail.com'),
+    ('Dr Rakesh Malhotra','Cardiologist','rmalhotra@gmail.com'),
+    ('Dr Sunita Verma','Gynecologist','sunita.verma@gmail.com'),
+    ('Dr Amit Choudhary','Orthopedic','amit.choudhary@gmail.com'),
+    ('Dr Pooja Iyer','Dermatologist','pooja.iyer@gmail.com'),
+    ('Dr Sanjay Kulkarni','Gastroenterologist','sanjay.k@hotmail.com'),
+    ('Dr Meenal Joshi','Endocrinologist','meenal.joshi@gmail.com'),
+    ('Dr Rohit Bansal','Oncologist','rohit.bansal@gmail.com'),
+    ('Dr Alpha Pandey','Neurophysiologist','alphapandey@gmail.com'),
+    ('Dr Beta Franklin','Neurosurgeon','betafranklin@gmail.com');

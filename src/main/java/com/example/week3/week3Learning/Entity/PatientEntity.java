@@ -47,7 +47,7 @@ public class PatientEntity {
     @OneToMany(mappedBy = "patient") //inverse side in this relationship
     private Set<Appointment> appointmentSet = new HashSet<>();
 
-
+    //as we want the appointments related to a patient be removed when the patient is deleted
 
 }
 

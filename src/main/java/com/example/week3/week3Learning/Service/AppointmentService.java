@@ -31,7 +31,7 @@ public class AppointmentService {
 
         appointmentRepository.save(appointment);
 
-        //now appointment has been changed to persistent state
+        //now appointment has been changed to persistent state,
         return appointment;
 
     }
