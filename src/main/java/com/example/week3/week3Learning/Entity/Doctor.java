@@ -32,6 +32,6 @@ public class Doctor {
     @Column(nullable = false, length =30)
     private String email;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<>();
 }

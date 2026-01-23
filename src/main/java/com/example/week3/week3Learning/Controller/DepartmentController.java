@@ -1,7 +1,9 @@
 package com.example.week3.week3Learning.Controller;
 
+import com.example.week3.week3Learning.DTO.DepartmentDTO;
 import com.example.week3.week3Learning.Entity.Department;
 import com.example.week3.week3Learning.Entity.Doctor;
+import com.example.week3.week3Learning.Mappers.DepartmentMapper;
 import com.example.week3.week3Learning.Service.DepartmentService;
 import com.example.week3.week3Learning.Service.DoctorService;
 import org.springframework.boot.CommandLineRunner;
@@ -14,33 +16,37 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/departments")
-public class DepartmentController implements CommandLineRunner {
+public class DepartmentController {
 
     private final DepartmentService departmentService;
     private final DoctorService doctorService;
+    private final DepartmentMapper departmentMapper;
 
-    DepartmentController(DepartmentService departmentService, DoctorService doctorService){
+    DepartmentController(DepartmentService departmentService, DoctorService doctorService,DepartmentMapper departmentMapper){
         this.departmentService = departmentService;
         this.doctorService = doctorService;
+        this.departmentMapper = departmentMapper;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    @PostMapping(path = "/create/{headDoctorId}")
+    public ResponseEntity<DepartmentDTO> createDepartment(@PathVariable Long headDoctorId) {
 
-        Doctor headDoctor = doctorService.findDoctorById(2L);
+        Doctor headDoctor = doctorService.findDoctorById(headDoctorId);
 
-        Department department = departmentService.makeNewDepartment(headDoctor);
+        Department newDepartment = departmentService.makeNewDepartment(headDoctor);
 
         //Builder.Default in Department can prevent this
-        System.out.println("checking "+department.getDoctors());
+        System.out.println("checking "+newDepartment.getDoctors());
 
         List<Doctor> doctorListToAdd = doctorService.findDoctorsByExpertise("neuro");
 
-        Department updatedDepartment = departmentService.addDoctors(doctorListToAdd, department.getId());
+        Department updatedDepartment = departmentService.addDoctors(doctorListToAdd, newDepartment.getId());
 
-        System.out.println(updatedDepartment.getName()+" has head doctor "+updatedDepartment.getHeadDoctor().getName()+" with department list below");
-
-        updatedDepartment.getDoctors().forEach(d-> System.out.println(d.getEmail()+", "+d.getExpertise()));
+        DepartmentDTO departmentDTO = departmentMapper.toDTO(updatedDepartment);
+        return ResponseEntity.ok(departmentDTO);
+//        System.out.println(updatedDepartment.getName()+" has head doctor "+updatedDepartment.getHeadDoctor().getName()+" with department list below");
+//
+//        updatedDepartment.getDoctors().forEach(d-> System.out.println(d.getEmail()+", "+d.getExpertise()));
 
 
     }

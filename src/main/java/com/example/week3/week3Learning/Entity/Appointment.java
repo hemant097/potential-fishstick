@@ -21,7 +21,7 @@ public class Appointment {
     private LocalDateTime appointmentTime;
 
     @Column(length = 500)
-    private String name;
+    private String reason;
 
     @JsonIgnore
     @ManyToOne // read this relationship like many appointment to one patient

@@ -25,7 +25,7 @@ public class InsuranceController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addInsuranceToPatient() {
+    public ResponseEntity<Insurance> addInsuranceToPatient() {
 
         Insurance insurance = Insurance.builder()
                 .provider("HDFC")
@@ -34,7 +34,7 @@ public class InsuranceController {
                 .build();
         Insurance updatedInsurance = insuranceService.assignInsuranceToPatient(insurance,1L);
 
-        return ResponseEntity.ok(   updatedInsurance.getPatient().getEmail()+" "+updatedInsurance.getProvider()+" "+updatedInsurance.getValidUntil());
+        return ResponseEntity.ok(updatedInsurance);
 
     }
 }

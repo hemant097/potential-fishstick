@@ -1,6 +1,8 @@
 package com.example.week3.week3Learning.Controller;
 
+import com.example.week3.week3Learning.DTO.AppointmentDTO;
 import com.example.week3.week3Learning.Entity.Appointment;
+import com.example.week3.week3Learning.Mappers.AppointmentMapper;
 import com.example.week3.week3Learning.Service.AppointmentService;
 import com.example.week3.week3Learning.Service.PatientService;
 import org.springframework.boot.CommandLineRunner;
@@ -15,24 +17,27 @@ import java.time.Month;
 public class AppointmentController  {
 
     private final AppointmentService appointmentService;
-    private final PatientService patientService;
+    private final AppointmentMapper appointmentMapper;
 
-    AppointmentController(AppointmentService appointmentService,  PatientService patientService){
+    AppointmentController(AppointmentService appointmentService, AppointmentMapper appointmentMapper){
         this.appointmentService = appointmentService;
-        this.patientService = patientService;
+        this.appointmentMapper = appointmentMapper;
+
     }
 
 
     @PostMapping("/create")
-    public ResponseEntity<String> createAppointment() {
+    public ResponseEntity<AppointmentDTO> createAppointment() {
 
         Appointment appointment = Appointment.builder()
                 .appointmentTime(LocalDateTime.of(2026, Month.FEBRUARY,01, 15,15))
-                .name("stomach infection")
+                .reason("stomach infection")
                 .build();
 
         Appointment updatedAppointment = appointmentService.createNewAppointment(appointment,1L,2L);
-        return ResponseEntity.ok(updatedAppointment.getDoctor().getName()+ " is the doctor for "+updatedAppointment.getPatient().getEmail());
+
+        AppointmentDTO appointmentDTO = appointmentMapper.toDto(updatedAppointment);
+        return ResponseEntity.ok(appointmentDTO);
 
 
     }
