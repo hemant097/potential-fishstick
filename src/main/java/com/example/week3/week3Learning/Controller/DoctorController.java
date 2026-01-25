@@ -1,12 +1,13 @@
 package com.example.week3.week3Learning.Controller;
 
+import com.example.week3.week3Learning.Entity.Doctor;
 import com.example.week3.week3Learning.Service.DoctorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.print.Doc;
+import java.util.List;
 
 @RestController
 @RequestMapping("/doctor")
@@ -25,5 +26,13 @@ public class DoctorController {
         return new ResponseEntity(str,HttpStatus.OK);
 
 
+    }
+
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<Doctor>> getAllDoctors(){
+
+        List<Doctor> doctorList = doctorService.getAllDoctors();
+
+        return ResponseEntity.ok(doctorList);
     }
 }

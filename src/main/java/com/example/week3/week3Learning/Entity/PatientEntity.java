@@ -1,6 +1,7 @@
 package com.example.week3.week3Learning.Entity;
 
 import com.example.week3.week3Learning.Entity.Type.BloodGroup;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,12 +41,14 @@ public class PatientEntity {
     @CreationTimestamp
     private LocalDate createdAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "ins_id") //should use on owning side
     private Insurance insurance;  //owning side
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL) //inverse side in this relationship
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)//inverse side in this relationship
     private Set<Appointment> appointmentSet = new HashSet<>();
+
+
 
     //as we want the appointments related to a patient be removed when the patient is deleted
 

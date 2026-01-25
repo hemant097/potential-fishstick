@@ -30,7 +30,7 @@ public class Insurance {
     @CreationTimestamp
     private LocalDate createdAt;
 
-    @OneToOne(mappedBy = "insurance")
+    @OneToOne(mappedBy = "insurance",fetch = FetchType.LAZY)
     @JsonIgnore
 //    //as we do not want 2 sources of truth,
 //    //insurance table shouldn't have patientId column, thus use mappedBy

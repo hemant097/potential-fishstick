@@ -24,7 +24,7 @@ public class Appointment {
     private String reason;
 
     @JsonIgnore
-    @ManyToOne // read this relationship like many appointment to one patient
+    @ManyToOne(fetch = FetchType.LAZY) // read this relationship like many appointment to one patient
     @JoinColumn(name = "patient_id", nullable = false)
     //owning side should have JoinColumn
     private PatientEntity patient;
@@ -32,7 +32,7 @@ public class Appointment {
 
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 

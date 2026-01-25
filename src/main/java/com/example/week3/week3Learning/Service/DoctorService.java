@@ -47,4 +47,8 @@ public class DoctorService {
         doctorRepository.delete(doctor);
         return "successfully deleted";
     }
+
+    public List<Doctor> getAllDoctors(){
+        return doctorRepository.findAll();
+    }
 }

@@ -52,7 +52,7 @@ public class DepartmentController {
     }
     @DeleteMapping("/del/{id}")
     public ResponseEntity<String> deleteDepartment(@PathVariable Long id){
-        departmentService.deleteDepartment(id);
-        return ResponseEntity.ok("deleted successfully");
+        String value = departmentService.deleteDepartment(id);
+        return ResponseEntity.ok(value);
     }
 }

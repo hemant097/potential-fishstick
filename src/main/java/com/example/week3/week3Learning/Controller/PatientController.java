@@ -5,17 +5,17 @@ import com.example.week3.week3Learning.DTO.CPatientInfo;
 import com.example.week3.week3Learning.DTO.IPatientInfo;
 import com.example.week3.week3Learning.Entity.Appointment;
 import com.example.week3.week3Learning.Entity.Insurance;
+import com.example.week3.week3Learning.Entity.PatientEntity;
 import com.example.week3.week3Learning.Repository.PatientRepository;
 import com.example.week3.week3Learning.Service.PatientService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/patients")
@@ -72,5 +72,13 @@ public class PatientController  {
     public ResponseEntity<String> deletePatientAndAppointments(@PathVariable Long id){
         patientService.deletePatient(id);
         return ResponseEntity.ok("deleted successfully");
+    }
+
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<PatientEntity>> getAllPatients(){
+
+        List<PatientEntity> patientList = patientService.findAllPatients();
+
+        return ResponseEntity.ok(patientList);
     }
 }

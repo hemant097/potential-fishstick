@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PatientService {
@@ -26,6 +28,10 @@ public class PatientService {
 
         PatientEntity p3 = patientRepository.findById(1L).orElseThrow();
         System.out.println(p3.getEmail());
+    }
+
+    public List<PatientEntity> findAllPatients(){
+        return patientRepository.getAllPatientsWithFullInformation();
     }
 
 

@@ -27,14 +27,15 @@ public class AppointmentController  {
 
 
     @PostMapping("/create")
-    public ResponseEntity<AppointmentDTO> createAppointment() {
+    public ResponseEntity<AppointmentDTO> createAppointment(@RequestParam(name = "pid") Long patientId,
+                                                            @RequestParam(name = "did") Long doctorId) {
 
         Appointment appointment = Appointment.builder()
                 .appointmentTime(LocalDateTime.of(2026, Month.FEBRUARY,01, 15,15))
                 .reason("stomach infection")
                 .build();
 
-        Appointment updatedAppointment = appointmentService.createNewAppointment(appointment,1L,2L);
+        Appointment updatedAppointment = appointmentService.createNewAppointment(appointment,patientId,doctorId);
 
         AppointmentDTO appointmentDTO = appointmentMapper.toDto(updatedAppointment);
         return ResponseEntity.ok(appointmentDTO);

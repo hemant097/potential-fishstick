@@ -4,6 +4,7 @@ import com.example.week3.week3Learning.Entity.Department;
 import com.example.week3.week3Learning.Entity.Doctor;
 import com.example.week3.week3Learning.Repository.DepartmentRepository;
 import com.example.week3.week3Learning.Repository.DoctorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -46,8 +47,14 @@ public class DepartmentService {
     }
 
     @Transactional
-    public void deleteDepartment(Long departmentId){
+    public String deleteDepartment(Long departmentId){
+
+        departmentRepository.findById(departmentId)
+                .orElseThrow(() -> new EntityNotFoundException("department not found"));
+
         departmentRepository.deleteById(departmentId);
-        System.out.println("deleted");
+
+        return "deleted successfully";
+
     }
 }

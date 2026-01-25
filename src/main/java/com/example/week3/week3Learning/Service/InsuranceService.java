@@ -27,4 +27,14 @@ public class InsuranceService {
         return insurance;
     }
 
+    @Transactional
+    public PatientEntity removeInsuranceOfAPatient( Long patientId){
+
+        PatientEntity patient = patientRepository.findById(patientId).orElseThrow();
+
+        patient.setInsurance(null);
+
+        return patient;
+    }
+
 }

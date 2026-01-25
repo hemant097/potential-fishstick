@@ -40,4 +40,9 @@ public interface PatientRepository extends JpaRepository<PatientEntity,Long> {
     @Query("DELETE from PatientEntity p where p.id=:id")
     int deletePatientWithId( @Param("id") Long id);
 
+    @Query("select p from PatientEntity p left join fetch p.appointmentSet left join fetch p.insurance")
+    List<PatientEntity> getAllPatientsWithFullInformation();
+
+
+
 }
